@@ -18,7 +18,7 @@ function checkAlarms() {
         (alarm) => alarm.time === currentTime && alarm.status === 1
       );
 
-      // Process the matching alarms as per your requirements
+      // Process the matching alarms
       if (matchingAlarms.length > 0) {
         matchingAlarms.forEach((alarm) => {
           currDB.setAlarmStatus(alarm.id, false);

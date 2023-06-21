@@ -124,6 +124,6 @@ app.on("window-all-closed", () => {
 // Reopen window when the app icon is clicked in the dock on macOS
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+    createMainWindow();
   }
 });
