@@ -1,6 +1,6 @@
 # Présentation
 
-Ce dépôt héberge une application ElectronJS qui permet de gérer des alarmes. L'application est conçue pour être facile à utiliser et à personnaliser. Elle est destinée à être utilisée par des personnes qui souhaitent gérer leurs alarmes de manière simple et efficace.
+Ce dépôt héberge une application ElectronJS qui permet de gérer des alarmes. L'application est conçue pour être facile à utiliser.
 
 # Installation
 
@@ -22,7 +22,7 @@ Pour lancer l'application, veuillez suivre les étapes suivantes :
 
 L'application actuelle permet de créer des alarmes et de les gérer facilement. Cependant, il y a des améliorations possibles pour rendre l'application encore plus utile et pratique. Voici quelques idées d'améliorations possibles :
 
-- Alarme personnalisée : permettre à l'utilisateur de choisir la musique de son choix depuis YouTube en utilisant l'API YouTube pour obtenir l'URL de la vidéo.
+- Alarme personnalisée : permettre à l'utilisateur de choisir la musique de son choix depuis YouTube en utilisant l'API YouTube pour obtenir le fichier son depuis l'URL de la video
 - Modification des alarmes existantes : permettre à l'utilisateur de modifier le nom et l'heure des alarmes existantes.
 
 # Contributions
