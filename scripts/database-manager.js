@@ -1,8 +1,10 @@
 const sqlite3 = require("sqlite3").verbose();
+const path = require("path");
 
 class AlarmDatabase {
   constructor() {
-    this.db = new sqlite3.Database("alarms.db");
+    const dbPath = path.join(__dirname, "..", "public", "alarms.db");
+    this.db = new sqlite3.Database(dbPath);
   }
 
   // Initialize the database by creating the alarms table if it doesn't exist

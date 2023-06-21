@@ -24,4 +24,3 @@ yarn-error.log*
 
 # database
 /public/alarms.db
-/alarms.db
