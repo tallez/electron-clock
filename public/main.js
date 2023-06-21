@@ -1,4 +1,18 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+const { AlarmDatabase } = require("./database-manager");
+
+// Retrieve all alarms from database
+ipcMain.on("retrieve-data", (event) => {
+  const currDB = new AlarmDatabase();
+  currDB.retrieveData((err, data) => {
+    if (err) {
+      console.error("Error retrieving data:", err);
+      // Handle the error accordingly
+    } else {
+      event.reply("retrieve-data-response", data);
+    }
+  });
+});
 
 // Create main application window
 function createMainWindow() {

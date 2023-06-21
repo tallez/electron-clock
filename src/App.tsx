@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const { ipcRenderer } = window.require("electron");
 
 interface AlarmsProps {
@@ -9,15 +9,30 @@ interface AlarmsProps {
 }
 
 function App() {
-  const [alarms, setAlarms] = useState<AlarmsProps[]>([
-    {
-      title: "test",
-      time: "12:00",
-      id: 1,
-      status: true,
-    },
-  ]);
-  const [currentTime, setCurrentTime] = useState("12:00");
+  const [alarms, setAlarms] = useState<AlarmsProps[]>([]);
+  const [currentTime, setCurrentTime] = useState<string>();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Get current time
+      const date = new Date();
+      const timeString = date.toLocaleTimeString();
+      setCurrentTime(timeString);
+
+      // Retrieve alarms from database
+      ipcRenderer.send("retrieve-data");
+      ipcRenderer.on(
+        "retrieve-data-response",
+        (_event: any, data: AlarmsProps[]) => {
+          setAlarms(data);
+        }
+      );
+    }, 1000); // Update every second
+
+    return () => {
+      clearInterval(intervalId); // Cleanup the interval on component unmount
+    };
+  }, []);
 
   return (
     <div className="w-screen h-screen">
