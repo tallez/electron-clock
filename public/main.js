@@ -53,6 +53,21 @@ ipcMain.on("create-alarm", (event, name, time) => {
   window.close();
 });
 
+// Remove alarm in database
+ipcMain.on("remove-alarm", (_event, id) => {
+  // Create an object, instance of database
+  const currDB = new AlarmDatabase();
+  // Proceed with operation and retrieve success status
+  const success = currDB.deleteAlarm(id);
+  if (!success) {
+    dialog.showMessageBox({
+      type: "error",
+      message: "Error removing the alarm",
+      buttons: ["OK"],
+    });
+  }
+});
+
 // Create main application window
 function createMainWindow() {
   const win = new BrowserWindow({

@@ -34,17 +34,13 @@ function App() {
     };
   }, []);
 
-  const openSetAlarmWindow = () => {
-    ipcRenderer.send("open-setalarm-window");
-  };
-
   return (
     <div className="w-screen h-screen">
       <div className="flex flex-col">
         <div className="flex flex-row justify-between font-sans text-2xl text-white bg-gradient-to-l from-purple-500 to-purple-600 font-extralight pt-8 px-4 pb-2 shadow-lg">
           <div className="flex flex-row items-center space-x-2">
             <p>Alarms</p>
-            <div onClick={() => openSetAlarmWindow()}>
+            <div onClick={() => ipcRenderer.send("open-setalarm-window")}>
               <AddAlarmButton />
             </div>
           </div>
@@ -63,7 +59,10 @@ function App() {
 const AlarmFrame = ({ alarm }: { alarm: AlarmsProps }) => {
   return (
     <div className="relative flex flex-col justify-between w-full h-40 p-2 border shadow-inner rounded-xl bg-gray-50">
-      <div className="absolute text-purple-500 transition-all duration-100 top-2 right-2 hover:text-red-500">
+      <div
+        onClick={() => ipcRenderer.send("remove-alarm", alarm.id)}
+        className="absolute text-purple-500 transition-all duration-100 top-2 right-2 hover:text-red-500"
+      >
         <DeleteAlarmButton />
       </div>
       <div className="py-2 text-4xl text-purple-500">
