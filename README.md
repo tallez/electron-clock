@@ -16,7 +16,8 @@ Pour installer et tester l'application, veuillez suivre les étapes suivantes :
 Pour lancer l'application, veuillez suivre les étapes suivantes :
 
 1. Ouvrez le dossier principal de l'application dans votre terminal.
-2. Exécutez la commande `npm run electron-dev` pour lancer l'application.
+2. Exécutez la commande `npm start` pour lancer react.
+3. Dans un nouveau terminal, executez `npm run electron-dev` pour lancer l'application Electron.
 
 # Améliorations
 
