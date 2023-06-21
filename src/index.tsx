@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import AddAlarm from "./AddAlarm";
+import TriggeredAlarm from "./TriggeredAlarm";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,6 +16,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}></Route>
         <Route path="/add-alarm" element={<AddAlarm />}></Route>
+        <Route path="/triggered-alarm" element={<TriggeredAlarm />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

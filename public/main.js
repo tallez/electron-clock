@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { AlarmDatabase } = require("../scripts/database-manager");
+const { checkAlarms } = require("../scripts/alarms-checker.js");
 
 // Retrieve all alarms from database
 ipcMain.on("retrieve-data", (event) => {
@@ -9,7 +10,6 @@ ipcMain.on("retrieve-data", (event) => {
       console.error("Error retrieving data:", err);
       // Handle the error accordingly
     } else {
-      console.log(data);
       event.reply("retrieve-data-response", data);
     }
   });
@@ -56,9 +56,7 @@ ipcMain.on("create-alarm", (event, name, time) => {
 
 // Remove alarm in database
 ipcMain.on("remove-alarm", (_event, id) => {
-  // Create an object, instance of database
   const currDB = new AlarmDatabase();
-  // Proceed with operation and retrieve success status
   const success = currDB.deleteAlarm(id);
   if (!success) {
     dialog.showMessageBox({
@@ -85,7 +83,16 @@ ipcMain.on("update-alarm-status", (event, id, status) => {
   });
 });
 
+// Close window
+ipcMain.on("close-window", (event) => {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  win.close();
+});
+
 // Create main application window
+// setInterval for checking the database:
+interval = 1000;
+
 function createMainWindow() {
   const win = new BrowserWindow({
     width: 800,
@@ -96,6 +103,8 @@ function createMainWindow() {
       contextIsolation: false,
     },
   });
+
+  setInterval(checkAlarms, interval);
 
   win.loadURL("http://localhost:3000");
 
