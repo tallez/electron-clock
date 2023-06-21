@@ -9,6 +9,7 @@ ipcMain.on("retrieve-data", (event) => {
       console.error("Error retrieving data:", err);
       // Handle the error accordingly
     } else {
+      console.log(data);
       event.reply("retrieve-data-response", data);
     }
   });
@@ -66,6 +67,22 @@ ipcMain.on("remove-alarm", (_event, id) => {
       buttons: ["OK"],
     });
   }
+});
+
+// Change status of alarm in the database
+ipcMain.on("update-alarm-status", (event, id, status) => {
+  const currDB = new AlarmDatabase();
+  currDB.setAlarmStatus(id, status).then((success) => {
+    if (success) {
+      event.reply("update-alarm-status-response", success);
+    } else {
+      dialog.showMessageBox({
+        type: "error",
+        message: "Error creating the alarm",
+        buttons: ["OK"],
+      });
+    }
+  });
 });
 
 // Create main application window

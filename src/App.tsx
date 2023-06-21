@@ -78,7 +78,15 @@ const AlarmFrame = ({ alarm }: { alarm: AlarmsProps }) => {
 const Toggle = ({ id, isActive }: { id: number; isActive: boolean }) => {
   const [active, setActive] = useState(isActive);
   const changeAlarmStatus = () => {
-    setActive(!active);
+    ipcRenderer.send("update-alarm-status", id, !active);
+    ipcRenderer.on(
+      "update-alarm-status-response",
+      (_event: any, success: boolean) => {
+        if (success) {
+          setActive(!active);
+        }
+      }
+    );
   };
 
   return (
