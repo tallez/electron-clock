@@ -14,6 +14,45 @@ ipcMain.on("retrieve-data", (event) => {
   });
 });
 
+// Open a window with the necessary UI to set up a new alarm
+ipcMain.on("open-setalarm-window", (event) => {
+  // Retrieve parent window
+  const win = BrowserWindow.fromWebContents(event.sender);
+  // Create a child window to set up the alarm
+  const winAlarmSet = new BrowserWindow({
+    width: 400,
+    height: 400,
+    modal: true,
+    parent: win || undefined, // Set the parent window
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
+
+  winAlarmSet.loadURL("http://localhost:3000/add-alarm");
+});
+
+// Create a new alarm in database
+ipcMain.on("create-alarm", (event, name, time) => {
+  // Create an object, instance of database
+  const currDB = new AlarmDatabase();
+  // Proceed with operation and retrieve sucess status
+  const success = currDB.insertAlarm(name, time);
+  if (success) {
+    event.reply("create-alarm-response", success);
+  } else {
+    dialog.showMessageBox({
+      type: "error",
+      message: "There was an error creating the alarm",
+      buttons: ["OK"],
+    });
+  }
+  // Close window
+  const window = BrowserWindow.fromWebContents(event.sender);
+  window.close();
+});
+
 // Create main application window
 function createMainWindow() {
   const win = new BrowserWindow({

@@ -34,13 +34,17 @@ function App() {
     };
   }, []);
 
+  const openSetAlarmWindow = () => {
+    ipcRenderer.send("open-setalarm-window");
+  };
+
   return (
     <div className="w-screen h-screen">
       <div className="flex flex-col">
         <div className="flex flex-row justify-between font-sans text-2xl text-white bg-gradient-to-l from-purple-500 to-purple-600 font-extralight pt-8 px-4 pb-2 shadow-lg">
           <div className="flex flex-row items-center space-x-2">
             <p>Alarms</p>
-            <div>
+            <div onClick={() => openSetAlarmWindow()}>
               <AddAlarmButton />
             </div>
           </div>
