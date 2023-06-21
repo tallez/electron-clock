@@ -21,9 +21,9 @@ ipcMain.on("open-setalarm-window", (event) => {
   const win = BrowserWindow.fromWebContents(event.sender);
   // Create a child window to set up the alarm
   const winAlarmSet = new BrowserWindow({
+    titleBarStyle: "hidden",
     width: 400,
     height: 400,
-    modal: true,
     parent: win || undefined, // Set the parent window
     webPreferences: {
       nodeIntegration: true,

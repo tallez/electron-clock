@@ -9,11 +9,11 @@ export default function AddAlarm() {
   };
   return (
     <div className="w-screen h-screen p-4">
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-8">
         <div className="font-sans text-2xl font-extralight text-purple-500">
           Add Alarm
         </div>
-        <hr></hr>
+        <hr className="my-2"></hr>
         <div className="w-full flex justify-center border rounded my-10 py-4">
           <form
             className="flex flex-col py-2"
