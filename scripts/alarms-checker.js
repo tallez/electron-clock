@@ -1,5 +1,6 @@
 const { AlarmDatabase } = require("./database-manager");
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+require("dotenv").config();
 
 function checkAlarms() {
   const currDB = new AlarmDatabase();
@@ -35,9 +36,9 @@ function checkAlarms() {
           });
 
           winAlarmTriggered.loadURL(
-            `http://localhost:3000/triggered-alarm?title=${encodeURIComponent(
-              alarm.title
-            )}`
+            `${
+              process.env.SERVER_URL
+            }/triggered-alarm?title=${encodeURIComponent(alarm.title)}`
           );
         });
       }

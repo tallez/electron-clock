@@ -4,8 +4,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import AddAlarm from "./AddAlarm";
-import TriggeredAlarm from "./TriggeredAlarm";
+import AddAlarm from "./add-alarm";
+import TriggeredAlarm from "./triggered-alarm";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
