@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import AddAlarmButton from "./components/AddAlarmButton";
-import AlarmFrame from "./components/AlarmFrame";
+import AddAlarmButton from "../components/AddAlarmButton";
+import AlarmFrame from "../components/AlarmFrame";
 const { ipcRenderer } = window.require("electron");
 
 function App() {
